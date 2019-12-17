@@ -1,0 +1,135 @@
+﻿@model PagedList.IPagedList<WebProject.Models.Sach>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "About";
+    ViewBag.FlagCount = 0;
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/HomePage.css">
+<style>
+    .sach-soluong {
+        color: #000000;
+    }
+</style>
+@Scripts.Render("~/bundles/buyItemApi")
+<body>
+    <div id="HomePage">
+        <div id="menu">
+
+            <ul>
+                <li><a href="/User/Logout">logout</a></li>
+                <li><a href="/User/EditProfile">Your profile</a></li>
+                <li><a href="/Book/Cart">Your Cart</a></li>
+                <li><a href="/ChiTietDons/Index">Your buy history</a></li>
+            </ul>
+        </div> <!-- end of menu -->
+        <div id="header">
+            <div id="special_offers">
+                <p>
+                    <span>25%</span> discounts for
+                    purchase over $80
+                </p>
+            </div>
+
+            <div id="new_books">
+                <ul>
+                    <li><a href="/User/EditProfile">Your profile</a></li>
+                    <li><a href="/Book/Cart">Your Cart</a></li>
+                    <li><a href="/ChiTietDons/Index">Your buy history</a></li>
+                </ul>
+            </div>
+        </div> <!-- end of header -->
+        <!-- content -->
+        <!--  content left -->
+        <div id="content">
+            <div id="content_left">
+                <h4><a href="/Book/Index">Home</a></h4>
+                <div class="content_left_section">
+                    <h1>Categories</h1>
+                    <ul>
+                        @foreach (var item in (List<WebProject.Models.TheLoai>)ViewBag.Categories)
+                        {
+                            @*<li>@Html.ActionLink(item.TheLoai1, "Index", "Book", new { category = item.MaTheLoai })</li>*@
+                            <li><a href="/Book/Index/?category=@item.MaTheLoai">@item.TheLoai1</a></li>
+                        }
+                    </ul>
+                </div>
+                @*Have to write query for best sellers*@
+                <div class="content_left_section">
+                    <h1>Authors</h1>
+                    <ul>
+                        @foreach (var item in (List<WebProject.Models.TacGia>)ViewBag.Authors)
+                        {
+                            @*<li>@Html.ActionLink(item.TheLoai1, "Index", "Book", new { category = item.MaTheLoai })</li>*@
+                            <li><a href="/Book/Index/?author=@item.MaTacGia">@item.TenTacGia</a></li>
+                        }
+                    </ul>
+                </div>
+            </div> <!-- end of content left -->
+
+            <div id="content_right">
+                @if (ViewBag.category != null)
+                {
+                    <h3>Current Category : @ViewBag.categoryDisplay  </h3>
+                }
+                @if (ViewBag.author != null)
+                {
+                    <h3>Current author : @ViewBag.authorDisplay     </h3>
+                }
+                @foreach (var item in Model)
+                {
+                    <div type="hidden" value="@item.MaSach"></div>
+                    <div class="product_box">
+                        <h1>@item.TenSach  <span>(by @item.TacGia.TenTacGia Author)</span></h1>
+                        <div class="product_info">
+                            <h3>Books  left in store: @item.Soluong</h3>
+                            <p>@item.Mota</p>
+                            <h3>@item.GiaBan$</h3>
+                            <h3>number Of books you want to buy: <input type="number" class="sach-soluong" color=#000000 min="0" max="@item.Soluong" id="@item.MaSach" /></h3>
+                            <div class="buy_now_button" onclick="addItem()"><a id="@item.MaSach">Add cart</a></div>
+                            <div class="detail_button"><a href="@Url.Action("DetailBook", new {@MaSach = item.MaSach })">Detail</a></div>
+                        </div>
+                        <div class="cleaner">&nbsp;</div>
+                    </div>
+
+                    if (ViewBag.FlagCount == 0)
+                    {
+                        ViewBag.FlagCount = 1;
+                        <div class="cleaner_with_width">&nbsp;</div>
+                    }
+                    else
+                    {
+                        ViewBag.FlagCount = 0;
+                        <div class="cleaner_with_height">&nbsp;</div>
+                    }
+                }
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount)
+                @if (ViewBag.category != null)
+                {
+                    @Html.PagedListPager(Model, page => Url.Action("Index",
+                         new { page, category = ViewBag.category }))
+                }
+                else if (ViewBag.author != null)
+                {
+                    @Html.PagedListPager(Model, page => Url.Action("Index",
+                        new { page, author = ViewBag.author }))
+                }
+                else
+                {
+                    @Html.PagedListPager(Model, page => Url.Action("Index",
+                    new { page }))
+
+                }
+            </div> <!-- end of content -->
+
+            <div id="footer">
+
+                <a href="#">Home</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br />
+                Copyright © 2048 <a href="#"><strong>Your Company Name</strong></a>
+            </div>
+            <!-- end of footer -->
+            <!--  Free CSS Template www.templatemo.com -->
+        </div> <!-- end of container -->
+    </div>
+</body>

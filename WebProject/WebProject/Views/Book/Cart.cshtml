@@ -1,0 +1,148 @@
+﻿@using WebProject.Models
+@model List<GioHang>
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/BookLayout.cshtml";
+    ViewBag.TotalMoney = 0;
+}
+@if (ViewBag.CartError != null)
+{
+    <script>
+        alert("@ViewBag.CartError")
+        window.location = "/Book/Index"
+    </script>
+}
+else
+{
+    @Scripts.Render("~/bundles/buyItemApi")
+    <style>
+        button {
+            font-size: 22px;
+            border-radius: 5px;
+            width: auto;
+            height: auto;
+            color: #ff0000;
+        }
+
+        #total-money {
+            font-size: 22px;
+            border-radius: 5px;
+            width: auto;
+            height: auto;
+            color: #ffffff;
+            display: inline;
+        }
+
+        .text {
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 27px;
+            font-weight: bold;
+            border: 4px;
+            /* border-color: white; */
+        }
+
+        .text1 {
+            font-size: 20px;
+            padding-top: 14px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-left: 631px;
+            font-size: 50px;
+            font-weight: bold;
+            padding-bottom: 64px;
+        }
+
+        .text1 {
+            font-size: 20px;
+            padding-top: 14px;
+            text-align: center;
+        }
+
+        .footer {
+            padding-top: 50px;
+            margin-left: 500px;
+        }
+    </style>
+    <h2>Cart</h2>
+    <div class="row ">
+        <div class="col-sm-1 text">
+            <div> code</div>
+        </div>
+        <div class="col-sm-4 text">
+            <div>Name of book</div>
+        </div>
+        <div class="col-sm-2 text">
+            <div>price</div>
+        </div>
+        <div class="col-sm-2 text">
+            <div>number of book</div>
+        </div>
+        <div class="col-sm-3 text">
+            <div>total money</div>
+        </div>
+
+    </div>
+    @*<table>
+            <tr>
+                <td> book code </td>
+
+                <td> Name of book </td>
+
+                <td> price </td>
+
+                <td> number of book </td>
+
+                <td> total money </td>
+            </tr>
+        </table>*@
+    foreach (var item in Model)
+    {
+        {
+            ViewBag.TotalMoney += item.ThanhTien;
+        }
+
+
+        <div class="row">
+            <div class="col-sm-1  text1">
+                <div>@item.iMaSach</div>
+            </div>
+            <div class="col-sm-4 text1">
+                <div>@item.sTenSach </div>
+            </div>
+            <div class="col-sm-2 text1">
+                <div> @string.Format("{0:0:0}", item.dGiaSach.ToString()) VND</div>
+            </div>
+            <div class="col-sm-2 text1">
+                <div>@item.iSoLuong</div>
+            </div>
+            <div class="col-sm-3 text1">
+                <div>@string.Format("{0:0:0}", item.ThanhTien.ToString()) VND</div>
+            </div>
+
+        </div>
+        @*<tr>
+                <td> @item.iMaSach </td>
+
+                <td> @item.sTenSach </td>
+
+                <td> @string.Format("{0:0:0}", item.dGiaSach.ToString()) VND</td>
+
+                <td> @item.iSoLuong </td>
+
+                <td> @string.Format("{0:0:0}", item.ThanhTien.ToString()) VND</td>
+            </tr>*@
+
+
+        <br />
+    }
+    <div class="footer">
+        <input type="button" class="btn" name="name" value="Buy items" onclick="buyItems()" />
+
+        <div id="total-money">Total money : @ViewBag.TotalMoney</div>
+
+    </div>
+
+}

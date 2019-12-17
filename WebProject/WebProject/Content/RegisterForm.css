@@ -1,0 +1,36 @@
+﻿.form-register {
+    position: relative;
+    background-image: url(book1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 770px;
+    padding-top: 47px;
+    font-family: sans-serif;
+}
+.background_form {
+    width: 722px;
+    height: 663px;
+    background-color: #2196f33d;
+    margin-left: 733px;
+}
+.form-group
+{
+    margin-top:50px;
+    padding-top:30px;
+}
+.txtbox{
+    width:300px;
+}
+label.control-label.col-md-4 {
+    text-align: center;
+}
+.letter_left {
+    width: 315px;
+    font-weight: 900;
+    background-color: #ba797926;
+    color: wheat;
+    margin-left: 960px;
+    margin-top: -21px;
+    position: absolute;
+   
+}

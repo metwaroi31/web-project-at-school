@@ -1,0 +1,82 @@
+﻿@model IEnumerable<WebProject.Models.NguoiQuanLy>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Add new manager", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Username :
+        </th>
+        <th>
+            Name :
+        </th>
+        <th>
+            Date of birth:
+        </th>
+        <th>
+            Gender
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Manager who adds
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modeItem => item.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoTen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgaySinh)
+        </td>
+        <td>
+            <select class="tri-state list-box" disabled="disabled">
+                @if (item.GioiTinh == true)
+                {
+                    <option value="">No gender</option>
+                    <option selected="selected" value="true">Male</option>
+                    <option value="false">Female</option>
+                }
+                else if (item.GioiTinh == false)
+                {
+                    <option value="">No gender</option>
+                    <option value="true">Male</option>
+                    <option selected="selected" value="false">Female</option>
+                }
+                else
+                {
+                    <option selected="selected" value="">No gender</option>
+                    <option value="true">Male</option>
+                    <option value="false">Female</option>
+                }
+            </select>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DienThoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NguoiQuanLy2.username)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.username }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.username })
+        </td>
+    </tr>
+}
+
+</table>

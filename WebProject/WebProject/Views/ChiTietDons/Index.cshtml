@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebProject.Models.ChiTietDon>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/BookLayout.cshtml";
+}
+
+<h2>Items you bought</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Quantity :
+        </th>
+        <th>
+            price :
+        </th>
+        <th>
+            Book ID :
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DonGia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaSach)
+        </td>
+    </tr>
+}
+
+</table>

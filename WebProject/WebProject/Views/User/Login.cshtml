@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@*  header top *@
+@Scripts.Render("~/bundles/loginApi")
+<script>
+    function redirect() {
+        window.location = "/User/Register"
+    }
+</script>
+<div class="headerTop">
+
+    <div class="col-sm-6 KhoiTextSlide">
+        <h2>welcome to our library</h2>
+        <h1>IT's NICE TO MEET YOU </h1>
+
+    </div>
+    <div class="col-sm-6 login-box">
+        <h1>Login </h1>
+        <div class="textbox">
+            <i class="glyphicon glyphicon-user"></i>
+            <input id="username" type="text" name="" value="" placeholder="UserName" />
+        </div>
+        <div class="textbox">
+            <i class="glyphicon glyphicon-lock"></i>
+            <input id="password" type="password" name="" value="" placeholder="password" />
+        </div>
+        <div class="nut">
+            <input onclick="login()" class="btn btn1" type="button" name="" value="Sign in" />
+            <input onclick="redirect()" class="btn btn2" type="button" name="" value="Register" />
+        </div>
+
+    </div>
+
+</div>
+@* end header top *@
+
+
+@*  service *@
+<div class=" service">
+    <div class="container">
+        <div class=" row text-center">
+            <h2> Our Sirvice</h2>
+
+            <div class="col-sm-4">
+                <div class="bigicon">
+                    <div class="glyphicon glyphicon-shopping-cart"></div>
+                </div>
+                <h3> E-Commerce</h3>
+                <p> every knowledge</p>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="bigicon">
+                    <div class="glyphicon glyphicon-phone"></div>
+                </div>
+                <h3> E-Commerce</h3>
+                <p> every knowledge</p>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="bigicon">
+                    <div class="glyphicon glyphicon-bishop"></div>
+                </div>
+                <h3> E-Commerce</h3>
+                <p> every knowledge</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+@*  end  service *@
+
+@*  team *@
+<div class="team">
+    <div class="container">
+        <div class="row text-center">
+            <h2> Our Team</h2>
+            <div class="col-sm-4">
+                <div class="information">
+                    <div class="avatar">
+                        <img src="~/Content/01-thumbnail.jpg" alt="Alternate Text" class="img-responsive" />
+                    </div>
+                    <div class="name">
+                        <h4>Anh Bui</h4>
+                    </div>
+                    @*<div class="social">
+                            <ul>
+                                <li> <a href="#" class="glyphicon-" ></a></li>
+                            </ul>
+                        </div>*@
+                </div>
+
+            </div>
+            <div class="col-sm-4">
+                <div class="information">
+                    <div class="avatar">
+                        <img src="~/Content/01-thumbnail.jpg" alt="Alternate Text" class="img-responsive" />
+                    </div>
+                    <div class="name">
+                        <h4>Anh Bui</h4>
+                    </div>
+                    @*<div class="social">
+                            <ul>
+                                <li> <a href="#" class="glyphicon-" ></a></li>
+                            </ul>
+                        </div>*@
+                </div>
+
+            </div>
+            <div class="col-sm-4">
+                <div class="information">
+                    <div class="avatar">
+                        <img src="~/Content/01-thumbnail.jpg" alt="Alternate Text" class="img-responsive" />
+                    </div>
+                    <div class="name">
+                        <h4>Anh Bui</h4>
+                    </div>
+                    @*<div class="social">
+                            <ul>
+                                <li> <a href="#" class="glyphicon-" ></a></li>
+                            </ul>
+                        </div>*@
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+@*  end team *@

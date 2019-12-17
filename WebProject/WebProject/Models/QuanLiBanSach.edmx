@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QuanLiSach1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ChiTietDon">
+          <Key>
+            <PropertyRef Name="MaDonHang" />
+            <PropertyRef Name="MaSach" />
+          </Key>
+          <Property Name="MaDonHang" Type="int" Nullable="false" />
+          <Property Name="MaSach" Type="int" Nullable="false" />
+          <Property Name="SoLuong" Type="int" Nullable="false" />
+          <Property Name="DonGia" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="DonHang">
+          <Key>
+            <PropertyRef Name="MaDonHang" />
+          </Key>
+          <Property Name="MaDonHang" Type="int" Nullable="false" />
+          <Property Name="DaThanhToan" Type="int" Nullable="false" />
+          <Property Name="NgayDat" Type="date" Nullable="false" />
+          <Property Name="NgayGiao" Type="date" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="HoTen" Type="nvarchar" MaxLength="100" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="GioiTinh" Type="bit" />
+          <Property Name="DienThoai" Type="varchar" MaxLength="11" />
+          <Property Name="username" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NguoiQuanLy">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="HoTen" Type="nvarchar" MaxLength="100" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="GioiTinh" Type="bit" />
+          <Property Name="DienThoai" Type="varchar" MaxLength="11" />
+          <Property Name="username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="NguoiThem" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Sach">
+          <Key>
+            <PropertyRef Name="MaSach" />
+          </Key>
+          <Property Name="MaSach" Type="int" Nullable="false" />
+          <Property Name="TenSach" Type="nvarchar" MaxLength="100" />
+          <Property Name="GiaBan" Type="money" />
+          <Property Name="Mota" Type="nvarchar" MaxLength="200" />
+          <Property Name="MaTheLoai" Type="int" />
+          <Property Name="Soluong" Type="int" />
+          <Property Name="MaTacGia" Type="int" />
+        </EntityType>
+        <EntityType Name="TacGia">
+          <Key>
+            <PropertyRef Name="MaTacGia" />
+          </Key>
+          <Property Name="MaTacGia" Type="int" Nullable="false" />
+          <Property Name="TenTacGia" Type="nvarchar" MaxLength="100" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
+          <Property Name="DienThoai" Type="varchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="TheLoai">
+          <Key>
+            <PropertyRef Name="MaTheLoai" />
+          </Key>
+          <Property Name="MaTheLoai" Type="int" Nullable="false" />
+          <Property Name="TheLoai" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__ChiTietDo__MaDon__239E4DCF">
+          <End Role="DonHang" Type="Self.DonHang" Multiplicity="1" />
+          <End Role="ChiTietDon" Type="Self.ChiTietDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DonHang">
+              <PropertyRef Name="MaDonHang" />
+            </Principal>
+            <Dependent Role="ChiTietDon">
+              <PropertyRef Name="MaDonHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DonHang__usernam__1CF15040">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
+          <End Role="DonHang" Type="Self.DonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="DonHang">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KhachHang__usern__1273C1CD">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="KhachHang">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NguoiQuan__usern__15502E78">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="NguoiQuanLy" Type="Self.NguoiQuanLy" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="NguoiQuanLy">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sach__MaTacGia__20C1E124">
+          <End Role="TacGia" Type="Self.TacGia" Multiplicity="0..1" />
+          <End Role="Sach" Type="Self.Sach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacGia">
+              <PropertyRef Name="MaTacGia" />
+            </Principal>
+            <Dependent Role="Sach">
+              <PropertyRef Name="MaTacGia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sach__MaTheLoai__1FCDBCEB">
+          <End Role="TheLoai" Type="Self.TheLoai" Multiplicity="0..1" />
+          <End Role="Sach" Type="Self.Sach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheLoai">
+              <PropertyRef Name="MaTheLoai" />
+            </Principal>
+            <Dependent Role="Sach">
+              <PropertyRef Name="MaTheLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiQuanLy_NguoiQuanLy">
+          <End Role="NguoiQuanLy" Type="Self.NguoiQuanLy" Multiplicity="0..1" />
+          <End Role="NguoiQuanLy1" Type="Self.NguoiQuanLy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiQuanLy">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="NguoiQuanLy1">
+              <PropertyRef Name="NguoiThem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLiSach1ModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChiTietDon" EntityType="Self.ChiTietDon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DonHang" EntityType="Self.DonHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NguoiQuanLy" EntityType="Self.NguoiQuanLy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sach" EntityType="Self.Sach" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TacGia" EntityType="Self.TacGia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TheLoai" EntityType="Self.TheLoai" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ChiTietDo__MaDon__239E4DCF" Association="Self.FK__ChiTietDo__MaDon__239E4DCF">
+            <End Role="DonHang" EntitySet="DonHang" />
+            <End Role="ChiTietDon" EntitySet="ChiTietDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DonHang__usernam__1CF15040" Association="Self.FK__DonHang__usernam__1CF15040">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="DonHang" EntitySet="DonHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KhachHang__usern__1273C1CD" Association="Self.FK__KhachHang__usern__1273C1CD">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="KhachHang" EntitySet="KhachHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NguoiQuan__usern__15502E78" Association="Self.FK__NguoiQuan__usern__15502E78">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="NguoiQuanLy" EntitySet="NguoiQuanLy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sach__MaTacGia__20C1E124" Association="Self.FK__Sach__MaTacGia__20C1E124">
+            <End Role="TacGia" EntitySet="TacGia" />
+            <End Role="Sach" EntitySet="Sach" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sach__MaTheLoai__1FCDBCEB" Association="Self.FK__Sach__MaTheLoai__1FCDBCEB">
+            <End Role="TheLoai" EntitySet="TheLoai" />
+            <End Role="Sach" EntitySet="Sach" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiQuanLy_NguoiQuanLy" Association="Self.FK_NguoiQuanLy_NguoiQuanLy">
+            <End Role="NguoiQuanLy" EntitySet="NguoiQuanLy" />
+            <End Role="NguoiQuanLy1" EntitySet="NguoiQuanLy" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuanLiSach1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TacGia">
+          <Key>
+            <PropertyRef Name="MaTacGia" />
+          </Key>
+          <Property Name="MaTacGia" Type="Int32" Nullable="false" />
+          <Property Name="TenTacGia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Saches" Relationship="QuanLiSach1Model.FK__Sach__MaTacGia__20C1E124" FromRole="TacGia" ToRole="Sach" />
+        </EntityType>
+        <EntityContainer Name="QuanLiSach1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TacGias" EntityType="Self.TacGia" />
+          <EntitySet Name="Accounts" EntityType="QuanLiSach1Model.Account" />
+          <EntitySet Name="DonHangs" EntityType="QuanLiSach1Model.DonHang" />
+          <EntitySet Name="KhachHangs" EntityType="QuanLiSach1Model.KhachHang" />
+          <EntitySet Name="NguoiQuanLies" EntityType="QuanLiSach1Model.NguoiQuanLy" />
+          <EntitySet Name="Saches" EntityType="QuanLiSach1Model.Sach" />
+          <EntitySet Name="TheLoais" EntityType="QuanLiSach1Model.TheLoai" />
+          <EntitySet Name="ChiTietDons" EntityType="QuanLiSach1Model.ChiTietDon" />
+          <AssociationSet Name="FK__KhachHang__usern__1273C1CD" Association="QuanLiSach1Model.FK__KhachHang__usern__1273C1CD">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NguoiQuan__usern__15502E78" Association="QuanLiSach1Model.FK__NguoiQuan__usern__15502E78">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="NguoiQuanLy" EntitySet="NguoiQuanLies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietDo__MaDon__22AA2996" Association="QuanLiSach1Model.FK__ChiTietDo__MaDon__22AA2996">
+            <End Role="DonHang" EntitySet="DonHangs" />
+            <End Role="ChiTietDon" EntitySet="ChiTietDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DonHang__usernam__1CF15040" Association="QuanLiSach1Model.FK__DonHang__usernam__1CF15040">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="DonHang" EntitySet="DonHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiQuanLy_NguoiQuanLy" Association="QuanLiSach1Model.FK_NguoiQuanLy_NguoiQuanLy">
+            <End Role="NguoiQuanLy" EntitySet="NguoiQuanLies" />
+            <End Role="NguoiQuanLy1" EntitySet="NguoiQuanLies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sach__MaTacGia__20C1E124" Association="QuanLiSach1Model.FK__Sach__MaTacGia__20C1E124">
+            <End Role="TacGia" EntitySet="TacGias" />
+            <End Role="Sach" EntitySet="Saches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sach__MaTheLoai__1FCDBCEB" Association="QuanLiSach1Model.FK__Sach__MaTheLoai__1FCDBCEB">
+            <End Role="TheLoai" EntitySet="TheLoais" />
+            <End Role="Sach" EntitySet="Saches" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="KhachHang" Relationship="QuanLiSach1Model.FK__KhachHang__usern__1273C1CD" FromRole="Account" ToRole="KhachHang" />
+          <NavigationProperty Name="NguoiQuanLy" Relationship="QuanLiSach1Model.FK__NguoiQuan__usern__15502E78" FromRole="Account" ToRole="NguoiQuanLy" />
+        </EntityType>
+        <EntityType Name="DonHang">
+          <Key>
+            <PropertyRef Name="MaDonHang" />
+          </Key>
+          <Property Name="MaDonHang" Type="Int32" Nullable="false" />
+          <Property Name="DaThanhToan" Type="Int32" Nullable="false" />
+          <Property Name="NgayDat" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NgayGiao" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ChiTietDons" Relationship="QuanLiSach1Model.FK__ChiTietDo__MaDon__22AA2996" FromRole="DonHang" ToRole="ChiTietDon" />
+          <NavigationProperty Name="KhachHang" Relationship="QuanLiSach1Model.FK__DonHang__usernam__1CF15040" FromRole="DonHang" ToRole="KhachHang" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="GioiTinh" Type="Boolean" />
+          <Property Name="DienThoai" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Account" Relationship="QuanLiSach1Model.FK__KhachHang__usern__1273C1CD" FromRole="KhachHang" ToRole="Account" />
+          <NavigationProperty Name="DonHangs" Relationship="QuanLiSach1Model.FK__DonHang__usernam__1CF15040" FromRole="KhachHang" ToRole="DonHang" />
+        </EntityType>
+        <EntityType Name="NguoiQuanLy">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="GioiTinh" Type="Boolean" />
+          <Property Name="DienThoai" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NguoiThem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Account" Relationship="QuanLiSach1Model.FK__NguoiQuan__usern__15502E78" FromRole="NguoiQuanLy" ToRole="Account" />
+          <NavigationProperty Name="NguoiQuanLy1" Relationship="QuanLiSach1Model.FK_NguoiQuanLy_NguoiQuanLy" FromRole="NguoiQuanLy" ToRole="NguoiQuanLy1" />
+          <NavigationProperty Name="NguoiQuanLy2" Relationship="QuanLiSach1Model.FK_NguoiQuanLy_NguoiQuanLy" FromRole="NguoiQuanLy1" ToRole="NguoiQuanLy" />
+        </EntityType>
+        <EntityType Name="Sach">
+          <Key>
+            <PropertyRef Name="MaSach" />
+          </Key>
+          <Property Name="MaSach" Type="Int32" Nullable="false" />
+          <Property Name="TenSach" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GiaBan" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Mota" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MaTheLoai" Type="Int32" />
+          <Property Name="Soluong" Type="Int32" />
+          <Property Name="MaTacGia" Type="Int32" />
+          <NavigationProperty Name="TacGia" Relationship="QuanLiSach1Model.FK__Sach__MaTacGia__20C1E124" FromRole="Sach" ToRole="TacGia" />
+          <NavigationProperty Name="TheLoai" Relationship="QuanLiSach1Model.FK__Sach__MaTheLoai__1FCDBCEB" FromRole="Sach" ToRole="TheLoai" />
+        </EntityType>
+        <EntityType Name="TheLoai">
+          <Key>
+            <PropertyRef Name="MaTheLoai" />
+          </Key>
+          <Property Name="MaTheLoai" Type="Int32" Nullable="false" />
+          <Property Name="TheLoai1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Saches" Relationship="QuanLiSach1Model.FK__Sach__MaTheLoai__1FCDBCEB" FromRole="TheLoai" ToRole="Sach" />
+        </EntityType>
+        <EntityType Name="ChiTietDon">
+          <Key>
+            <PropertyRef Name="MaSach" />
+            <PropertyRef Name="MaDonHang" />
+          </Key>
+          <Property Name="MaDonHang" Type="Int32" Nullable="false" />
+          <Property Name="MaSach" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <Property Name="DonGia" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DonHang" Relationship="QuanLiSach1Model.FK__ChiTietDo__MaDon__22AA2996" FromRole="ChiTietDon" ToRole="DonHang" />
+        </EntityType>
+        <Association Name="FK__KhachHang__usern__1273C1CD">
+          <End Type="QuanLiSach1Model.Account" Role="Account" Multiplicity="1" />
+          <End Type="QuanLiSach1Model.KhachHang" Role="KhachHang" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="KhachHang">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NguoiQuan__usern__15502E78">
+          <End Type="QuanLiSach1Model.Account" Role="Account" Multiplicity="1" />
+          <End Type="QuanLiSach1Model.NguoiQuanLy" Role="NguoiQuanLy" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="NguoiQuanLy">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietDo__MaDon__22AA2996">
+          <End Type="QuanLiSach1Model.DonHang" Role="DonHang" Multiplicity="1" />
+          <End Type="QuanLiSach1Model.ChiTietDon" Role="ChiTietDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DonHang">
+              <PropertyRef Name="MaDonHang" />
+            </Principal>
+            <Dependent Role="ChiTietDon">
+              <PropertyRef Name="MaDonHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DonHang__usernam__1CF15040">
+          <End Type="QuanLiSach1Model.KhachHang" Role="KhachHang" Multiplicity="1" />
+          <End Type="QuanLiSach1Model.DonHang" Role="DonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="DonHang">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiQuanLy_NguoiQuanLy">
+          <End Type="QuanLiSach1Model.NguoiQuanLy" Role="NguoiQuanLy" Multiplicity="0..1" />
+          <End Type="QuanLiSach1Model.NguoiQuanLy" Role="NguoiQuanLy1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiQuanLy">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="NguoiQuanLy1">
+              <PropertyRef Name="NguoiThem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sach__MaTacGia__20C1E124">
+          <End Type="QuanLiSach1Model.TacGia" Role="TacGia" Multiplicity="0..1" />
+          <End Type="QuanLiSach1Model.Sach" Role="Sach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacGia">
+              <PropertyRef Name="MaTacGia" />
+            </Principal>
+            <Dependent Role="Sach">
+              <PropertyRef Name="MaTacGia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sach__MaTheLoai__1FCDBCEB">
+          <End Type="QuanLiSach1Model.TheLoai" Role="TheLoai" Multiplicity="0..1" />
+          <End Type="QuanLiSach1Model.Sach" Role="Sach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheLoai">
+              <PropertyRef Name="MaTheLoai" />
+            </Principal>
+            <Dependent Role="Sach">
+              <PropertyRef Name="MaTheLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuanLiSach1ModelStoreContainer" CdmEntityContainer="QuanLiSach1Entities">
+          <EntitySetMapping Name="TacGias">
+            <EntityTypeMapping TypeName="QuanLiSach1Model.TacGia">
+              <MappingFragment StoreEntitySet="TacGia">
+                <ScalarProperty Name="MaTacGia" ColumnName="MaTacGia" />
+                <ScalarProperty Name="TenTacGia" ColumnName="TenTacGia" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="QuanLiSach1Model.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DonHangs">
+            <EntityTypeMapping TypeName="QuanLiSach1Model.DonHang">
+              <MappingFragment StoreEntitySet="DonHang">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="NgayGiao" ColumnName="NgayGiao" />
+                <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
+                <ScalarProperty Name="DaThanhToan" ColumnName="DaThanhToan" />
+                <ScalarProperty Name="MaDonHang" ColumnName="MaDonHang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhachHangs">
+            <EntityTypeMapping TypeName="QuanLiSach1Model.KhachHang">
+              <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NguoiQuanLies">
+            <EntityTypeMapping TypeName="QuanLiSach1Model.NguoiQuanLy">
+              <MappingFragment StoreEntitySet="NguoiQuanLy">
+                <ScalarProperty Name="NguoiThem" ColumnName="NguoiThem" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Saches">
+            <EntityTypeMapping TypeName="QuanLiSach1Model.Sach">
+              <MappingFragment StoreEntitySet="Sach">
+                <ScalarProperty Name="MaTacGia" ColumnName="MaTacGia" />
+                <ScalarProperty Name="Soluong" ColumnName="Soluong" />
+                <ScalarProperty Name="MaTheLoai" ColumnName="MaTheLoai" />
+                <ScalarProperty Name="Mota" ColumnName="Mota" />
+                <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+                <ScalarProperty Name="TenSach" ColumnName="TenSach" />
+                <ScalarProperty Name="MaSach" ColumnName="MaSach" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TheLoais">
+            <EntityTypeMapping TypeName="QuanLiSach1Model.TheLoai">
+              <MappingFragment StoreEntitySet="TheLoai">
+                <ScalarProperty Name="TheLoai1" ColumnName="TheLoai" />
+                <ScalarProperty Name="MaTheLoai" ColumnName="MaTheLoai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChiTietDons">
+            <EntityTypeMapping TypeName="QuanLiSach1Model.ChiTietDon">
+              <MappingFragment StoreEntitySet="ChiTietDon">
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="MaSach" ColumnName="MaSach" />
+                <ScalarProperty Name="MaDonHang" ColumnName="MaDonHang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,68 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
+
+.middle {
+    margin-left: 500px;
+    position: absolute;
+    top: 20%;
+    /* left: 40%; */
+    transform: translate(-50%,-50);
+}
+
+.menu {
+    width: 496px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.item {
+    display: block;
+    padding: 16px 20px;
+    background: #6fe7e745;
+    color: white;
+}
+
+.smenu {
+    background: #c04b4b59;
+    overflow: hidden;
+    text-align: center;
+}
+
+    .smenu a {
+        display: block;
+        padding: 16px 26px;
+        color: white;
+        font-size: 14px;
+        margin: 4px 0px;
+        position: relative;
+    }
+
+.cover {
+    height: 800px;
+    background: #2d5959b0;
+    width: 100%;
+}
+
+a.btn {
+    margin-left: 125px;
+    /* padding-left: 73px; */
+    color: white;
+    /* background: aqua; */
+    /* text-align: center; */
+}
+
+h1.title {
+    position: absolute;
+    font-family: sans-serif;
+    color: #f8f4f2;
+    margin-left: 634px;
+}
+
+input#btnCart {
+    margin-left: 122px;
+}

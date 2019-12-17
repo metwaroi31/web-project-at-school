@@ -1,0 +1,29 @@
+﻿@using WebProject.Models
+@model  Sach
+
+@{
+    ViewBag.Title = "DetailBook";
+    Layout = "~/Views/Shared/BookLayout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/DetailBook.css">
+<div class="cover">
+    <h1 class="title">DETAIL BOOK</h1>
+    <div class="middle">
+        <div class="menu">
+            <li class="item">
+                <a href="#" class="btn"> BOOK CODE</a>
+                <div class="smenu"> @Model.MaSach</div>
+            </li>
+
+            <li class="item">
+                <a href="#" class="btn"> NAME OF BOOK</a>
+                <div class="smenu">@Model.TenSach</div>
+            </li>
+            <li class="item">
+                <a href="#" class="btn"> DISCRIBE</a>
+                <div class="smenu">@Model.Mota</div>
+            </li>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿@model WebProject.Models.NguoiQuanLy
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>manager</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTen)
+        </dd>
+
+        <dt>
+            Date of birth : 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgaySinh)
+        </dd>
+
+        <dt>
+           Gender :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioiTinh)
+        </dd>
+
+        <dt>
+            Phone :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienThoai)
+        </dd>
+
+        <dt>
+            Username : 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account.username)
+        </dd>
+
+        <dt>
+            Manager who adds : 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NguoiQuanLy2.username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.username }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
